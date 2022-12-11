@@ -12,6 +12,7 @@ setup(){
   export INPUT_BASE_REF='master'
   export INPUT_ENVPATH_PATTERN='kustomize/*'
   export TMP_DIR='/tmp/tmp.test'
+  export GITHUB_WORKSPACE='/tmp'
 }
 
 teardown() {
@@ -26,6 +27,7 @@ teardown() {
   #expectStdOutContains "::set-output name=diff::``` diff%0A%0A```"
 
   expectMockCalled "/usr/local/bin/git checkout dev --quiet
+/usr/local/bin/git config --global --add safe.directory /tmp
 /usr/local/bin/git checkout master --quiet
 /usr/local/bin/git diff --no-index /tmp/tmp.test/master /tmp/tmp.test/dev"
 }

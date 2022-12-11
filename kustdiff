@@ -12,6 +12,7 @@ function git_diff {
 function build {
   local ref="$1"
   printf "\n\nChecking out ref: %s\n" "$ref"
+  git config --global --add safe.directory $GITHUB_WORKSPACE
   git checkout "$ref" --quiet
   for envpath in $INPUT_ENVPATH_PATTERN; do
     local build_dir
